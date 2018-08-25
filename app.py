@@ -1,13 +1,14 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import render_template
 from flask import request
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = './gdmm.db'
+current_path = os.path.dirname(os.path.abspath(__file__))
+print(current_path)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s/gdmm.db' % current_path
 db = SQLAlchemy(app)
-
-db.create_all()
 
 
 class Message(db.Model):
